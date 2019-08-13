@@ -38,24 +38,15 @@ server.post('/get-prefix-stats', (req, res) => {
                 sendData += 'Error. Failed to parse attribute combination from request.';
             }
             else {
-                /*for (var i = 0; i < fullRes.length; i++) {
-                    sendData += fullRes[i].name + ' ';
-                }*/
-                
-                var combo;
-                for (combo of fullRes) {
+                for (const combo of fullRes) {
                     if (combo.name === searchItem) {
-                        var stat;
-                        for (stat of combo.attributes) {
+                        for (const stat of combo.attributes) {
                             sendData += stat.attribute + ' ';
                         }
                         break;
                     }
                 }
             }
-            /*for (var i = 0; i < fullRes.length; i++) {
-                if (fullRes[i].name === searchTerm)
-            }*/
             
             return res.json({
                 fulfillmentText: sendData,
