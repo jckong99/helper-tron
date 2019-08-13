@@ -50,7 +50,7 @@ server.post('/get-prefix-stats', (req, res) => {
                     }
                 }
             }*/
-            sendData += fullRes[0];
+            sendData += fullRes[0].name;
             
             return res.json({
                 fulfillmentText: sendData,
