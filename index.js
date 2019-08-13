@@ -34,11 +34,15 @@ server.post('/get-prefix-stats', (req, res) => {
         apiRes.on('end', () => {
             fullRes = JSON.parse(fullRes);
             let sendData = 'Response: ';
-            /*if (searchTerm === 'Unidentified') {
+            if (searchTerm === 'Unidentified') {
                 sendData += 'Error. Failed to parse attribute combination from request.';
             }
             else {
-                var combo;
+                for (var i = 0; i < fullRes.length; i++) {
+                    sendData += fullRes[i].name + ' ';
+                }
+                
+                /*var combo;
                 for (combo in fullRes) {
                     sendData += '\n' + combo;
                     if (combo.name === searchTerm) {
@@ -48,9 +52,8 @@ server.post('/get-prefix-stats', (req, res) => {
                         }
                         break;
                     }
-                }
-            }*/
-            sendData += fullRes[2].name;
+                }*/
+            }
             
             return res.json({
                 fulfillmentText: sendData,
