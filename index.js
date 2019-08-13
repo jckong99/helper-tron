@@ -46,7 +46,8 @@ server.post('/get-prefix-stats', (req, res) => {
                             items: [
                                 {
                                     simpleResponse: {
-                                        textToSpeech: sendData
+                                        textToSpeech: sendData,
+                                        displayText: sendData
                                     }
                                 }
                             ]
