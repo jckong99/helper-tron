@@ -18,7 +18,7 @@ server.use(bodyParser.json());
 
 // Server post to /get-prefix-stats route
 server.post('/get-prefix-stats', (req, res) => {
-    const searchItem = req.body.result && req.body.result.parameters && req.body.result.parameters.Prefix ? req.body.result.parameters.Prefix : 'Failed search item parsing';
+    const searchItem = req.queryResult && req.queryResult.parameters && req.queryresult.parameters.Prefix ? req.body.result.parameters.Prefix : 'Failed search item parsing';
     const searchURL = encodeURI(BASE_URL + '/itemstats/584');
     
     // HTTPS get request
@@ -39,9 +39,18 @@ server.post('/get-prefix-stats', (req, res) => {
             //sendData += fullRes;
             
             return res.json({
-                speech: sendData,
-                displayText: sendData,
-                source: 'get-prefix-stats'
+                payload: {
+                    google: {
+                        expectUserResponse: false,
+                        richResponse: {
+                            items: [
+                                simpleResponse: {
+                                textToSpeech: sendData
+                                }
+                            ]
+                        }
+                    }
+                }
             });
         });
     }, (error) => {
