@@ -9,7 +9,7 @@ const bodyParser = require('body-parser');
 const BASE_URL = 'https://api.guildwars2.com/v2';
 
 // Attribute name conversion function
-function convertAttributeName (attribute) {
+function convertAttributeName(attribute) {
     var returnName;
     
     switch (attribute) {
