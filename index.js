@@ -23,7 +23,7 @@ server.post('/get-prefix-stats', (req, res) => {
     
     // HTTPS get request
     https.get(searchURL, apiRes => {
-        apiRes.setEncoding('utf8');
+        //apiRes.setEncoding('utf8');
 
         let fullRes = '';
 
@@ -35,35 +35,18 @@ server.post('/get-prefix-stats', (req, res) => {
         // Listener for end event
         apiRes.on('end', () => {
             fullRes = JSON.parse(fullRes);
-            let sendData = 'Successful retrieval!';
+            let sendData = 'Successful retrieval of ' + searchItem + '!';
             //sendData += fullRes;
             
             return res.json({
-                textToSpeech: sendData,
+                speech: sendData,
                 displayText: sendData,
                 source: 'get-prefix-stats'
-                
-              /*payload: {
-                google: {
-                  expectUserResponse: false,
-                  richResponse: {
-                    items: [
-                      {
-                        simpleResponse: {
-                          textToSpeech: sendData
-                        }
-                      }
-                    ]
-                  }
-                }
-              }*/
-                
-
             });
         });
     }, (error) => {
         return res.json({
-            textToSpeech: 'Something went wrong!',
+            speech: 'Something went wrong!',
             displayText: 'Something went wrong!',
             source: 'get-prefix-stats'
         });
