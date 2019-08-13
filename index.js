@@ -39,9 +39,26 @@ server.post('/get-prefix-stats', (req, res) => {
             //sendData += fullRes;
             
             return res.json({
-                speech: sendData,
+                /*speech: sendData,
                 displayText: sendData,
-                source: 'get-prefix-stats'
+                source: 'get-prefix-stats'*/
+                {
+                  payload: {
+                    google: {
+                      expectUserResponse: false,
+                      richResponse: {
+                        items: [
+                          {
+                            simpleResponse: {
+                              textToSpeech: sendData
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+
             });
         });
     }, (error) => {
