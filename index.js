@@ -35,11 +35,14 @@ server.post('/get-prefix-stats', (req, res) => {
         // Listener for end event
         apiRes.on('end', () => {
             fullRes = JSON.parse(fullRes);
-            let sendData = 'Successful retrieval of ' + searchItem + '!';
+            let sendData = 'Successful retrieval of ' + searchItem + ' stats!';
             //sendData += fullRes;
             
             return res.json({
-                payload: {
+                speech: sendData,
+                displayText: sendData,
+                source: 'get-prefix-stats'
+                /*payload: {
                     google: {
                         expectUserResponse: false,
                         richResponse: {
@@ -53,7 +56,7 @@ server.post('/get-prefix-stats', (req, res) => {
                             ]
                         }
                     }
-                }
+                }*/
             });
         });
     }, (error) => {
