@@ -33,6 +33,7 @@ server.post('/get-prefix-stats', (req, res) => {
         // Listener for end event
         apiRes.on('end', () => {
             fullRes = JSON.parse(fullRes);
+            let sendData = 'Response: ';
             /*if (searchTerm === 'Unidentified') {
                 sendData += 'Error. Failed to parse attribute combination from request.';
             }
@@ -49,7 +50,7 @@ server.post('/get-prefix-stats', (req, res) => {
                     }
                 }
             }*/
-            sendData += fullRes[80].name;
+            sendData += fullRes[2].name;
             
             return res.json({
                 fulfillmentText: sendData,
