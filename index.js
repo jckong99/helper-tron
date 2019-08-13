@@ -18,7 +18,7 @@ server.use(bodyParser.json());
 
 // Server post to /get-prefix-stats route
 server.post('/get-prefix-stats', (req, res) => {
-    const searchItem = req.queryResult && req.queryResult.parameters && req.queryresult.parameters.Prefix ? req.body.result.parameters.Prefix : 'Failed search item parsing';
+    const searchItem = req.body && req.body.queryResult && req.body.queryResult.parameters && req.body.queryResult.parameters.Prefix ? req.body.queryResult.parameters.Prefix : 'Failed search item parsing';
     const searchURL = encodeURI(BASE_URL + '/itemstats/584');
     
     // HTTPS get request
