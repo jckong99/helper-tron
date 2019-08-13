@@ -40,8 +40,8 @@ server.post('/get-prefix-stats', (req, res) => {
             
             return res.json({
                 fulfillmentText: sendData,
-                speech: sendData,
-                displayText: sendData,
+                //speech: sendData,
+                //displayText: sendData,
                 source: 'get-prefix-stats'
                 /*payload: {
                     google: {
