@@ -33,7 +33,7 @@ server.post('/get-prefix-stats', (req, res) => {
         // Listener for end event
         apiRes.on('end', () => {
             fullRes = JSON.parse(fullRes);
-            let sendData = '';
+            let sendData = 'Response: ';
             if (searchTerm === 'Unidentified') {
                 sendData += 'Error. Failed to parse attribute combination from request.';
             }
