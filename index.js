@@ -39,7 +39,7 @@ server.post('/get-prefix-stats', (req, res) => {
             }
             else {
                 var combo;
-                for (combo of fullRes) {
+                for (combo in fullRes) {
                     sendData += '\n' + combo;
                     /*if (combo.name === searchTerm) {
                         var stat;
