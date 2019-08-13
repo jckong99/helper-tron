@@ -44,7 +44,6 @@ server.post('/get-prefix-stats', (req, res) => {
                 
                 var combo;
                 for (combo of fullRes) {
-                    sendData += combo.name;
                     if (combo.name === searchItem) {
                         var stat;
                         for (stat of combo.attributes) {
