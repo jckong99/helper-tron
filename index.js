@@ -38,9 +38,9 @@ server.post('/get-prefix-stats', (req, res) => {
                 sendData += 'Error. Failed to parse attribute combination from request.';
             }
             else {
-                for (var i = 0; i < fullRes.length; i++) {
+                /*for (var i = 0; i < fullRes.length; i++) {
                     sendData += fullRes[i].name + ' ';
-                }
+                }*/
                 
                 var combo;
                 for (combo of fullRes) {
