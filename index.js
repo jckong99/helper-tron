@@ -39,6 +39,7 @@ server.post('/get-prefix-stats', (req, res) => {
             //sendData += fullRes;
             
             return res.json({
+                fulfillmentText: sendData,
                 speech: sendData,
                 displayText: sendData,
                 source: 'get-prefix-stats'
