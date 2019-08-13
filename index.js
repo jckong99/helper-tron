@@ -18,7 +18,7 @@ server.use(bodyParser.json());
 
 // Server post to /get-prefix-stats route
 server.post('/get-prefix-stats', (req, res) => {
-    const searchItem = req.body && req.body.queryResult && req.body.queryResult.parameters && req.body.queryResult.parameters.Prefix ? req.body.queryResult.parameters.Prefix : 'Unidentified';
+    const searchItem = req.body && req.body.queryResult && req.body.queryResult.parameters && req.body.queryResult.parameters.Prefix ? req.body.queryResult.parameters.Prefix : 'Unexpected';
     const searchURL = encodeURI(BASE_URL + '/itemstats?ids=all');
     
     // HTTPS get request
@@ -32,19 +32,27 @@ server.post('/get-prefix-stats', (req, res) => {
 
         // Listener for end event
         apiRes.on('end', () => {
-            fullRes = JSON.parse(fullRes);
             let sendData = '';
-            if (searchItem === 'Unidentified') {
+            let statList = [];
+            
+            fullRes = JSON.parse(fullRes);
+            
+            if (searchItem === 'Unexpected') {
                 sendData += 'Error. Failed to parse attribute combination from request.';
             }
             else {
                 for (const combo of fullRes) {
                     if (combo.name === searchItem) {
                         for (const stat of combo.attributes) {
-                            sendData += stat.attribute + ' ';
+                            statList.push(stat.attribute);
                         }
                         break;
                     }
+                }
+                
+                sendData += 'There are ' + statList.length + ' attribute combinations total:\n';
+                for (const s of statList) {
+                    sendData += s + ' ';
                 }
             }
             
