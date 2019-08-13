@@ -81,8 +81,8 @@ server.post('/get-prefix-stats', (req, res) => {
                         
                         // Find multiplier value of major attribute(s)
                         for (const stat of combo.attributes) {
-                            if (majorMult < stat.multiplier) {
-                                majorMult = stat.multiplier;
+                            if (majorStatMult < stat.multiplier) {
+                                majorStatMult = stat.multiplier;
                             }
                         }
                         break;
@@ -91,7 +91,7 @@ server.post('/get-prefix-stats', (req, res) => {
                 
                 // Divide attributes into major and minor categories
                 for (const stat of comboObject.attributes) {
-                    if (stat.multiplier === majorMult) {
+                    if (stat.multiplier === majorStatMult) {
                         majorStatNames.push(convertAttributeName(stat.attribute));
                     }
                     else {
@@ -107,7 +107,7 @@ server.post('/get-prefix-stats', (req, res) => {
                 else {
                     sendData += majorStatNames[0] + ' as a major attribute as well as ';
                 }
-                sendData += minorStatNames[0] + ' and ' + minorStatnames[1] + ' as minor attributes.';
+                sendData += minorStatNames[0] + ' and ' + minorStatNames[1] + ' as minor attributes.';
             }
             
             return res.json({
