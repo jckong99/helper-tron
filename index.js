@@ -42,22 +42,22 @@ server.post('/get-prefix-stats', (req, res) => {
                 /*speech: sendData,
                 displayText: sendData,
                 source: 'get-prefix-stats'*/
-                {
-                  payload: {
-                    google: {
-                      expectUserResponse: false,
-                      richResponse: {
-                        items: [
-                          {
-                            simpleResponse: {
-                              textToSpeech: sendData
-                            }
-                          }
-                        ]
+                
+              payload: {
+                google: {
+                  expectUserResponse: false,
+                  richResponse: {
+                    items: [
+                      {
+                        simpleResponse: {
+                          textToSpeech: sendData
+                        }
                       }
-                    }
+                    ]
                   }
                 }
+              }
+                
 
             });
         });
