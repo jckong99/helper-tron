@@ -39,11 +39,11 @@ server.post('/get-prefix-stats', (req, res) => {
             //sendData += fullRes;
             
             return res.json({
-                /*speech: sendData,
+                textToSpeech: sendData,
                 displayText: sendData,
-                source: 'get-prefix-stats'*/
+                source: 'get-prefix-stats'
                 
-              payload: {
+              /*payload: {
                 google: {
                   expectUserResponse: false,
                   richResponse: {
@@ -56,14 +56,14 @@ server.post('/get-prefix-stats', (req, res) => {
                     ]
                   }
                 }
-              }
+              }*/
                 
 
             });
         });
     }, (error) => {
         return res.json({
-            speech: 'Something went wrong!',
+            textToSpeech: 'Something went wrong!',
             displayText: 'Something went wrong!',
             source: 'get-prefix-stats'
         });
