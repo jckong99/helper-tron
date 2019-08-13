@@ -18,13 +18,11 @@ server.use(bodyParser.json());
 
 // Server post to /get-prefix-stats route
 server.post('/get-prefix-stats', (req, res) => {
-    const searchItem = req.body && req.body.queryResult && req.body.queryResult.parameters && req.body.queryResult.parameters.Prefix ? req.body.queryResult.parameters.Prefix : 'Failed search item parsing';
-    const searchURL = encodeURI(BASE_URL + '/itemstats/584');
+    const searchItem = req.body && req.body.queryResult && req.body.queryResult.parameters && req.body.queryResult.parameters.Prefix ? req.body.queryResult.parameters.Prefix : 'Unidentified';
+    const searchURL = encodeURI(BASE_URL + '/itemstats?ids=all');
     
     // HTTPS get request
     https.get(searchURL, apiRes => {
-        //apiRes.setEncoding('utf8');
-
         let fullRes = '';
 
         // Listener for data event
@@ -35,35 +33,31 @@ server.post('/get-prefix-stats', (req, res) => {
         // Listener for end event
         apiRes.on('end', () => {
             fullRes = JSON.parse(fullRes);
-            let sendData = 'Successful retrieval of ' + searchItem + ' stats!';
-            //sendData += fullRes;
+            let sendData = '';
+            if (searchTerm === 'Unidentified') {
+                sendData += 'Error. Failed to parse attribute combination from request.';
+            }
+            else {
+                var combo;
+                for (combo of fullRes) {
+                    if (combo.name === searchTerm) {
+                        var stat;
+                        for (stat of combo.attributes) {
+                            sendData += stat.attribute + ' ';
+                        }
+                        break;
+                    }
+                }
+            }
             
             return res.json({
                 fulfillmentText: sendData,
-                //speech: sendData,
-                //displayText: sendData,
                 source: 'get-prefix-stats'
-                /*payload: {
-                    google: {
-                        expectUserResponse: false,
-                        richResponse: {
-                            items: [
-                                {
-                                    simpleResponse: {
-                                        textToSpeech: sendData,
-                                        displayText: sendData
-                                    }
-                                }
-                            ]
-                        }
-                    }
-                }*/
             });
         });
     }, (error) => {
         return res.json({
-            speech: 'Something went wrong!',
-            displayText: 'Something went wrong!',
+            fulfillmentText: 'Something went wrong!',
             source: 'get-prefix-stats'
         });
     });
